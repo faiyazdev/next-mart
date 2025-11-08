@@ -63,7 +63,7 @@ export const Order = pgTable("orders", {
 
 export const DownloadVerification = pgTable("download_verifications", {
   id: uuid("id").primaryKey().defaultRandom(),
-  expires_at: timestamp("expires_at").defaultNow(),
+  expires_at: timestamp("expires_at"),
   created_at: timestamp("created_at").defaultNow().notNull(),
   productId: uuid("product_id").references(() => Product.id, {
     onDelete: "cascade",
@@ -95,3 +95,13 @@ export const OrderRelations = relations(Order, ({ one }) => ({
     references: [Product.id],
   }),
 }));
+
+export const DownloadVerificationRelations = relations(
+  DownloadVerification,
+  ({ one }) => ({
+    product: one(Product, {
+      fields: [DownloadVerification.productId],
+      references: [Product.id],
+    }),
+  })
+);
