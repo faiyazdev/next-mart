@@ -1,5 +1,4 @@
 import { db } from "@/database";
-import { usersTable } from "@/database/schema";
 
 function Home() {
   return (
@@ -10,13 +9,11 @@ function Home() {
         onSubmit={async () => {
           "use server";
 
-          await db
-            .insert(usersTable)
-            .values({
-              name: "faiyaz",
-              email: "faiyaz@gmail.com",
-              role: "ADMID",
-            });
+          // await db.insert(usersTable).values({
+          //   name: "faiyaz",
+          //   email: "faiyaz@gmail.com",
+          //   role: "ADMIN",
+          // });
         }}
       >
         <button type="submit">Create User!</button>
